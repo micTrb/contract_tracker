@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-let Exercise = require('../models/exercise_model');
+let Exercise = require('../models/exercise.model');
 
 
 //Get onload request
