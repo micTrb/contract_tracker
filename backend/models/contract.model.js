@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  username: {
+const contractSchema = new Schema({
+  contractName: {
     type: String,
     required: true,
     unique: true,
@@ -15,6 +15,6 @@ const userSchema = new Schema({
 });
 
 
-const User = mongoose.model('User', userSchema);
+const Contract = mongoose.model('Contract', contractSchema);
 
-module.exports = User;
+module.exports = Contract;

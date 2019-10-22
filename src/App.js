@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import Navbar from "./components/navbar.component"
-import ExercisesList from "./components/exercises-list.component";
-import EditExercise from "./components/edit-exercise.component";
-import CreateExercise from "./components/create-exercise.component";
-import CreateUser from "./components/create-user.component";
+import TracksList from "./components/track-list.component";
+import EditTrack from "./components/edit-exercise.component";
+import CreateTrack from "./components/create-track.component";
+import CreateContract from "./components/create-contract.component";
 
 function App() {
   return (
@@ -14,10 +14,10 @@ function App() {
       <div className="container">
         <Navbar/>
         <br/>
-        <Route path="/" exact component={ExercisesList} />
-        <Route path="/edit/:id" exact component={EditExercise} />
-        <Route path="/create" exact component={CreateExercise} />
-        <Route path="/user" exact component={CreateUser} />
+        <Route path="/" exact component={TracksList} />
+        <Route path="/edit/:id" exact component={EditTrack} />
+        <Route path="/create" exact component={CreateTrack} />
+        <Route path="/contract" exact component={CreateContract} />
       </div>
     </Router>
   );

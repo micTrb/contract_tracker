@@ -6,10 +6,10 @@ import chaiEnzyme from 'chai-enzyme';
 
 import Adapter from 'enzyme-adapter-react-16';
 import Navbar from "../components/navbar.component";
-import ExercisesList from "../components/exercises-list.component";
+import ExercisesList from "../components/track-list.component";
 import EditExercise from "../components/edit-exercise.component";
-import CreateExercise from "../components/create-exercise.component";
-import CreateUser from "../components/create-user.component";
+import CreateExercise from "../components/create-track.component";
+import CreateUser from "../components/create-contract.component";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
 configure({ adapter: new Adapter() });
