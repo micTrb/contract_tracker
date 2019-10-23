@@ -61,7 +61,7 @@ export default class EditExercise extends Component {
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            contracts: response.data.map(user => user.username),
+            contracts: response.data.map(contract => contract.username),
           })
         }
       })
