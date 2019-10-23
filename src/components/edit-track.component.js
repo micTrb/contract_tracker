@@ -73,6 +73,7 @@ export default class EditExercise extends Component {
 
 
   onChangeContractName(e) {
+    console.log(e);
     this.setState({
       contractName: e.target.value
     })
