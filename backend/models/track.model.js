@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const trackSchema = new Schema({
@@ -9,7 +9,7 @@ const trackSchema = new Schema({
   isrc_code: { type: String, required: true },
   p_line: { type: String },
   aliases: { type: Array },
-  contractName: { type: String },
+  contractName: { type: String, ref: 'Contract' },
 }, {
   timestamps: true,
 });

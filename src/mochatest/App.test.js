@@ -7,7 +7,7 @@ import chaiEnzyme from 'chai-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Navbar from "../components/navbar.component";
 import ExercisesList from "../components/track-list.component";
-import EditExercise from "../components/edit-exercise.component";
+import EditExercise from "../components/edit-track.component";
 import CreateExercise from "../components/create-track.component";
 import CreateUser from "../components/create-contract.component";
 import {BrowserRouter as Router, Route} from "react-router-dom";
@@ -21,12 +21,15 @@ describe('App Component testing', function() {
       <div className="container">
         <Navbar/>
         <br/>
-        <Route path="/" exact component={ExercisesList} />
-        <Route path="/edit/:id" exact component={EditExercise} />
-        <Route path="/create" exact component={CreateExercise} />
-        <Route path="/user" exact component={CreateUser} />
+
+        {/* Here are the routes which are not linked to the NAVBAR !!! */}
+        <Route path="/" exact component={TracksList} />
+        <Route path="/edit/:id" exact component={EditTrack} />
+        <Route path="/create" exact component={CreateTrack} />
+        <Route path="/contract" exact component={CreateContract} />
+
       </div>
-    </Router>;
+    </Router>
 
     expect(wrapper).to.contain(routerNavbar);
   });

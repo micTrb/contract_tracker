@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class CreateTrack extends Component {
+export default class EditExercise extends Component {
 
   constructor(props) {
     super(props);
@@ -33,23 +34,45 @@ export default class CreateTrack extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillMount() {
+
+
+  }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/contracts')
+    axios.get('http://localhost:5000/tracks/' + this.props.match.params.id)
       .then(response => {
-        if(response.data.length > 0) {
-          console.log(response);
+        this.setState({
+          title: response.data.title,
+          version: response.data.version,
+          artist: response.data.artist,
+          isrc_code: response.data.isrc_code,
+          p_line: response.data.p_line,
+          contractName: response.data.contractName,
+          aliasValue: '',
+          aliases: response.data.aliases,
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
+    axios.get('http://localhost:5000/contracts/')
+      .then(response => {
+        if (response.data.length > 0) {
           this.setState({
-            contracts: response.data.map(contract => contract.contractName ),
-            contractName: response.data[0].contractName,
+            contracts: response.data.map(user => user.username),
           })
         }
       })
-      .catch(err => console.log("Error: " + err));
+      .catch((error) => {
+        console.log(error);
+      })
+
   }
 
-  onChangeContractName(e) {
 
+  onChangeContractName(e) {
     this.setState({
       contractName: e.target.value
     })
@@ -130,10 +153,11 @@ export default class CreateTrack extends Component {
 
     console.log(track);
 
+    axios.post('http://localhost:5000/tracks/update/' + this.props.match.params.id, track)
+      .then(res => console.log(res.data));
 
-    axios.post('http://localhost:5000/tracks/add', track)
-      .then(res => console.log(res.data))
-      .catch(err => console.log("Err: " + err));
+    window.location = '/';
+
   }
 
 
@@ -145,9 +169,9 @@ export default class CreateTrack extends Component {
           <div className="form-group">
             <label>Contract name: </label>
             <select ref="userInput"
-              className="form-control"
-              value={this.state.contractName}
-              onChange={this.onChangeContractName}>
+                    className="form-control"
+                    value={this.state.contractName}
+                    onChange={this.onChangeContractName}>
               <option value="">-- no contract --</option>
               {
                 this.state.contracts.map(function(contract) {
@@ -163,47 +187,47 @@ export default class CreateTrack extends Component {
           <div className="form-group">
             <label>Title: </label>
             <input type="text"
-              required
-              className="form-control"
-              value={this.state.title}
-              onChange={this.onChangeTitle}
+                   required
+                   className="form-control"
+                   value={this.state.title}
+                   onChange={this.onChangeTitle}
             />
           </div>
 
           <div className="form-group">
             <label>Version: </label>
             <input type="text"
-               className="form-control"
-               value={this.state.version}
-               onChange={this.onChangeVersion}
+                   className="form-control"
+                   value={this.state.version}
+                   onChange={this.onChangeVersion}
             />
           </div>
 
           <div className="form-group">
             <label>Artist: </label>
             <input type="text"
-               className="form-control"
-               value={this.state.artist}
-               onChange={this.onChangeArtist}
+                   className="form-control"
+                   value={this.state.artist}
+                   onChange={this.onChangeArtist}
             />
           </div>
 
           <div className="form-group">
             <label>ISRC: </label>
             <input type="text"
-               required
-               className="form-control"
-               value={this.state.isrc_code}
-               onChange={this.onChangeCode}
+                   required
+                   className="form-control"
+                   value={this.state.isrc_code}
+                   onChange={this.onChangeCode}
             />
           </div>
 
           <div className="form-group">
             <label>P Line: </label>
             <input type="text"
-               className="form-control"
-               value={this.state.p_line}
-               onChange={this.onChangePLine}
+                   className="form-control"
+                   value={this.state.p_line}
+                   onChange={this.onChangePLine}
             />
           </div>
 
@@ -215,9 +239,9 @@ export default class CreateTrack extends Component {
 
               <div className="col-md-6">
                 <input type="text"
-                   className="form-control"
-                   value={this.state.aliasValue}
-                   onChange={this.onChangeAlias}
+                       className="form-control"
+                       value={this.state.aliasValue}
+                       onChange={this.onChangeAlias}
                 />
               </div>
 
@@ -231,14 +255,14 @@ export default class CreateTrack extends Component {
                   <li style={{display: "inline"}}>
                     <button className="btn btn-info"
                             type="button"
-                        onClick={this.onAddAlias}>
+                            onClick={this.onAddAlias}>
                       Add alias
                     </button>
                   </li>
                   <li style={{display: "inline", marginLeft: "10px"}}>
                     <button className="btn btn-danger"
                             type="button"
-                      onClick={this.onClearAliases}>
+                            onClick={this.onClearAliases}>
                       Clear alias
                     </button>
                   </li>

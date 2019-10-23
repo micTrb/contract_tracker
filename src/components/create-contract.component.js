@@ -32,11 +32,14 @@ export default class CreateContract extends Component {
 
     //sending data to backend
     axios.post('http://localhost:5000/contracts/add', contract)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Err: " + err));
 
     this.setState({
       contractName: ''
     })
+
+    window.location = "/";
 
   }
 
@@ -47,7 +50,7 @@ export default class CreateContract extends Component {
         <h3>Create New Contract</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Username: </label>
+            <label>Contract name: </label>
             <input  type="text"
               required
               className="form-control"

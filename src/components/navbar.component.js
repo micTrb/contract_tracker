@@ -9,6 +9,7 @@ export default class Navbar extends Component {
 
         <div className="collpase navbar-collapse">
           <ul className="navbar-nav mr-auto">
+
             <li className="navbar-item">
               <Link to="/" className="nav-link">Track list</Link>
             </li>
@@ -18,6 +19,7 @@ export default class Navbar extends Component {
             <li className="navbar-item">
               <Link to="/contract" className="nav-link">Create Contract</Link>
             </li>
+
           </ul>
         </div>
       </nav>

@@ -9,7 +9,7 @@ const Track = props => (
     <td>{props.track.artist}</td>
     <td>{props.track.isrc_code}</td>
     <td>{props.track.p_line}</td>
-    <td>{props.track.aliases}</td>
+    <td>{props.track.aliases.map(al => <p key={al+Math.random()} style={{display: "inline"}}>{al+"; "}</p>)}</td>
     <td>{props.track.contractName}</td>
 
     <td>

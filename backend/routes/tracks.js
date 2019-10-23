@@ -1,6 +1,13 @@
 const router = require('express').Router();
 
 let Track = require('../models/track.model');
+let Contract = require('../models/contract.model');
+
+
+//Get by id
+/*router.route('/contracts/').get((req, res) => {
+  console.log(req, res);
+})*/
 
 //Get onload request
 router.route('/').get((req, res) => {
@@ -28,6 +35,7 @@ router.route('/add').post((req, res) => {
     aliases,
     contractName
   });
+
 
   newTrack.save()
     .then(() => res.json('Track added!'))
