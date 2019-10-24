@@ -1,5 +1,5 @@
 
-##MERN Contract tracker
+## MERN Contract tracker
 
 A simple MERN (MongoDB, Express.js, React.js and Node.js) application to ingest track data based on music 
 contracts.
