@@ -2,15 +2,24 @@
 ## MERN Contract tracker
 
 A simple MERN (MongoDB, Express.js, React.js and Node.js) application to ingest track data based on music 
-contracts.
+contracts.<br/>
+The frontend is based on [Create React App](https://facebook.github.io/create-react-app)
 
 **Notice**: I provided a cluster that relies on my MongoDB account
 
-###Getting started
+### Getting started
 
-First of all, install root dependecies: 
+#####First of all, install root dependecies: 
 
-from ``` root ```
+from ``` root ``` launch
+
+###### `npm start`
+
+this command will install all the dependencies needed (including Mocha for testing and Babel).
+
+Then, install backend dependecies: 
+
+from ``` root/backend ``` launch
 
 ``` 
 npm install 
@@ -20,22 +29,8 @@ this command will install all the dependencies needed (including Mocha for testi
 
 <br />
 
-Then, install backend dependecies: 
 
-from ``` root/backend ```
-
-``` 
-npm install 
-```
-
-this command will install all the dependencies needed (including Mocha for testing and Babel).
-
-
-
-
-
-
-Launch the project from root directory:
+####Launch the project from root directory:
 ```
 npm run start
 ```
@@ -43,10 +38,21 @@ It will run the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-From root/backed directory
+###Main features
+The application is a database manager that enables the creation of contracts for musical tracks and tracks based on created contracts.
+It allows you to create a contract and create tracks based on that contract. 
+Additionally, you can edit or delete a track from the provided list.
+
+All the data are collections stored in a MongoDB cluster.
+
+####Data Models
+
+#####Contract model
+
+The contract model has schema
 
 ```
-npm 
+npm run start
 ```
 
 
@@ -55,8 +61,7 @@ npm
 
 
 
-
-## Available Scripts
+### Other Available Scripts
 
 In the project directory, you can run:
 
@@ -68,12 +73,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test`
+##### `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+###### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -83,7 +88,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+###### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
