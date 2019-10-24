@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const CustomOption = props => (
-    <option
-      key={props.contract.id}
-      data-key={props.contract.id}
-      value={props.contract.name}
-    >
-      {props.contract.name}
-    </option>
-)
 
 export default class CreateTrack extends Component {
 
