@@ -9,13 +9,16 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+//Get contract by id
 router.route('/:id').get((req, res) => {
   Contract.findById(req.params.id)
     .then(track => res.json(track))
     .catch(err => res.status(400).json('Error: ' + err))
 })
 
-// Post request
+
+// Post a contract
 router.route('/add').post((req, res) => {
   const contractName = req.body.contractName;
 

@@ -45,15 +45,13 @@ Additionally, you can edit or delete a track from the provided list.
 
 All the data are collections stored in a MongoDB cluster.
 
-####Data Models
+####Test
 
-#####Contract model
+from ``` root/backend ``` launch
 
-The contract model has schema
+###### `npm test`
 
-```
-npm run start
-```
+You should have installed all the devDependencies in order to use Mocha/Chai libraries
 
 
 

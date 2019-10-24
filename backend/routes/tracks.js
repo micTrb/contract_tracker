@@ -6,7 +6,6 @@ let Contract = require('../models/contract.model');
 
 //Get onload request
 router.route('/').get((req, res) => {
-
   Track.find()
     .then(track => res.json(track))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -37,7 +36,6 @@ router.route('/add').post((req, res) => {
 
 
   //DATA INGESTION RULES
-
   Contract.findById(contractID, function(err, contract) {
     if(contract !== 'undefined') {
       newTrack.save()
@@ -53,12 +51,11 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
   });
-
 });
+
 
 //Get by id
 router.route('/:id').get((req, res) => {
-
   Track.findById(req.params.id)
     .then(track => res.json(track))
     .catch(err => res.status(400).json('Error: ' + err))
@@ -70,7 +67,6 @@ router.route('/:id').delete((req, res) => {
     .then(() => res.json("Track deleted"))
     .catch(err => res.status(400).json('Error: ' + err))
 })
-
 
 //Update
 router.route('/update/:id').post((req, res) => {
@@ -84,9 +80,22 @@ router.route('/update/:id').post((req, res) => {
       track.aliases = req.body.aliases;
       track.contractName = req.body.contractName;
 
-      track.save()
-        .then(() => res.json('Exercise updated!'))
-        .catch(err => res.status(400).json('Error: ' + err))
+      //DATA INGESTION RULES
+      Contract.findById(contractID, function(err, contract) {
+        if(contract !== 'undefined') {
+          track.save()
+            .then(() => res.json('Track updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        }
+        else if(contractName && contract == 'undefined') {
+          return err;
+        }
+        else {
+          track.save()
+            .then(() => res.json('Track updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        }
+      });
     })
     .catch(err => res.status(400).json('Error: ' + err))
 })
