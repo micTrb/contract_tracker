@@ -13,7 +13,7 @@ The frontend is based on [Create React App](https://facebook.github.io/create-re
 
 from ``` root ``` launch
 
-###### `npm start`
+###### `npm install`
 
 this command will install all the dependencies needed (including Mocha for testing and Babel).
 
@@ -21,9 +21,7 @@ Then, install backend dependecies:
 
 from ``` root/backend ``` launch
 
-``` 
-npm install 
-```
+###### `npm install`
 
 this command will install all the dependencies needed (including Mocha for testing and Babel).
 
@@ -52,7 +50,7 @@ from ``` root/backend ``` launch
 ###### `npm test`
 
 You should have installed all the devDependencies in order to use Mocha/Chai libraries
-
+The test will consider all the 
 
 
 
