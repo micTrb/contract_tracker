@@ -9,7 +9,7 @@ The frontend is based on [Create React App](https://facebook.github.io/create-re
 
 ### Getting started
 
-#####First of all, install root dependecies: 
+**First of all, install root dependecies:**
 
 from ``` root ``` launch
 
@@ -30,7 +30,7 @@ this command will install all the dependencies needed (including Mocha for testi
 <br />
 
 
-####Launch the project from root directory:
+**Launch the project from root directory:**
 ```
 npm run start
 ```
@@ -38,14 +38,14 @@ It will run the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-###Main features
+### Main features
 The application is a database manager that enables the creation of contracts for musical tracks and tracks based on created contracts.
 It allows you to create a contract and create tracks based on that contract. 
 Additionally, you can edit or delete a track from the provided list.
 
 All the data are collections stored in a MongoDB cluster.
 
-###Test
+### Test
 
 from ``` root/backend ``` launch
 
