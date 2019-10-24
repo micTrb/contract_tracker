@@ -6,14 +6,16 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+
 const app = express();
 
 const port = process.env.port || 5000;
 const uri = process.env.ATLAS_URI;
-console.log(typeof uri);
+
 
 app.use(cors());
 app.use(express.json());
+app.set('host', 'localhost');
 
 //Connect to database
 
