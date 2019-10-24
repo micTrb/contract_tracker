@@ -28,6 +28,12 @@ this command will install all the dependencies needed (including Mocha for testi
 <br />
 
 
+**Connect to the server from root/backend:**
+```
+nodemon server
+```
+
+
 **Launch the project from root directory:**
 ```
 npm run start
