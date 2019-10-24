@@ -50,7 +50,8 @@ from ``` root/backend ``` launch
 ###### `npm test`
 
 You should have installed all the devDependencies in order to use Mocha/Chai libraries
-The test will consider all the 
+The test will consider models validations and http requests.
+
 
 
 
