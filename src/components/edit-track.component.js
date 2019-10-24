@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+const CustomOption = props => (
+  <option
+    key={props.contract.id}
+    data-key={props.contract.id}
+    value={props.contract.name}
+  >
+    {props.contract.name}
+  </option>
+)
+
 
 export default class EditExercise extends Component {
 
@@ -15,6 +25,7 @@ export default class EditExercise extends Component {
       isrc_code: '',
       p_line: '',
       contractName: '',
+      contractID: '',
       aliasValue: '',
       aliases: [],
       contracts: []
@@ -34,10 +45,6 @@ export default class EditExercise extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillMount() {
-
-
-  }
 
   componentDidMount() {
     axios.get('http://localhost:5000/tracks/' + this.props.match.params.id)
@@ -48,6 +55,7 @@ export default class EditExercise extends Component {
           artist: response.data.artist,
           isrc_code: response.data.isrc_code,
           p_line: response.data.p_line,
+          contractID: response.data.contractID,
           contractName: response.data.contractName,
           aliasValue: '',
           aliases: response.data.aliases,
@@ -57,26 +65,46 @@ export default class EditExercise extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/contracts/')
+    axios.get('http://localhost:5000/contracts')
       .then(response => {
-        if (response.data.length > 0) {
+        if(response.data.length > 0) {
+          console.log(response);
           this.setState({
-            contracts: response.data.map(contract => contract.username),
+            contracts: response.data.map(contract => (
+              {
+                id: contract._id,
+                name: contract.contractName
+              }
+            )),
+            contractName: response.data[0].contractName
           })
         }
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch(err => console.log("Error: " + err));
 
   }
 
 
   onChangeContractName(e) {
-    console.log(e);
-    this.setState({
-      contractName: e.target.value
-    })
+    const selectedIndex = e.target.options.selectedIndex;
+    const id = e.target.options[selectedIndex].getAttribute('data-key');
+    console.log(id);
+
+    if(id) {
+      axios.get('http://localhost:5000/contracts/' + id)
+        .then(response => this.setState({
+          contractID: response.data._id,
+          contractName: response.data.contractName,
+        }))
+        .catch(err => console.log("Error: " + err));
+    }
+    else {
+      this.setState({
+        contractID: "",
+        contractName: "no-contract",
+      })
+    }
+
   }
 
   onChangeTitle(e) {
@@ -149,7 +177,7 @@ export default class EditExercise extends Component {
       isrc_code: this.state.isrc_code,
       p_line: this.state.p_line,
       aliases: this.state.aliases,
-      contractName: this.state.contractName
+      contractName: this.state.contractName,
     }
 
     console.log(track);
@@ -173,13 +201,22 @@ export default class EditExercise extends Component {
                     className="form-control"
                     value={this.state.contractName}
                     onChange={this.onChangeContractName}>
-              <option value="">-- no contract --</option>
+              <option
+                key={null}
+                data-key={null}
+                value={null}
+              >
+                -- no contract --
+              </option>
               {
                 this.state.contracts.map(function(contract) {
                   return <option
-                    key={contract}
-                    value={contract}>{contract}
-                  </option>;
+                    key={contract.id}
+                    data-key={contract.id}
+                    value={contract.name}
+                  >
+                    {contract.name}
+                  </option>
                 })
               }
             </select>
@@ -276,7 +313,7 @@ export default class EditExercise extends Component {
 
 
           <div className="form-group">
-            <input type="submit" value="Create Track" className="btn btn-primary" />
+            <input type="submit" value="Update Track" className="btn btn-primary" />
           </div>
         </form>
       </div>

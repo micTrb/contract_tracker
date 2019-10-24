@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 
+const CustomOption = props => (
+    <option
+      key={props.contract.id}
+      data-key={props.contract.id}
+      value={props.contract.name}
+    >
+      {props.contract.name}
+    </option>
+)
+
 export default class CreateTrack extends Component {
 
   constructor(props) {
@@ -14,6 +24,7 @@ export default class CreateTrack extends Component {
       isrc_code: '',
       p_line: '',
       contractName: '',
+      contractID: '',
       aliasValue: '',
       aliases: [],
       contracts: []
@@ -38,10 +49,14 @@ export default class CreateTrack extends Component {
     axios.get('http://localhost:5000/contracts')
       .then(response => {
         if(response.data.length > 0) {
-          console.log(response);
           this.setState({
-            contracts: response.data.map(contract => contract.contractName ),
-            contractName: response.data[0].contractName,
+            contracts: response.data.map(contract => (
+              {
+                id: contract._id,
+                name: contract.contractName
+              }
+            )),
+            contractName: response.data[0].contractName
           })
         }
       })
@@ -49,10 +64,25 @@ export default class CreateTrack extends Component {
   }
 
   onChangeContractName(e) {
+    const selectedIndex = e.target.options.selectedIndex;
+    const id = e.target.options[selectedIndex].getAttribute('data-key');
+    console.log(id);
 
-    this.setState({
-      contractName: e.target.value
-    })
+    if(id) {
+      axios.get('http://localhost:5000/contracts/' + id)
+        .then(response => this.setState({
+          contractID: response.data._id,
+          contractName: response.data.contractName,
+        }))
+        .catch(err => console.log("Error: " + err));
+    }
+    else {
+      this.setState({
+        contractID: "",
+        contractName: "no-contract",
+      })
+    }
+
   }
 
   onChangeTitle(e) {
@@ -125,11 +155,11 @@ export default class CreateTrack extends Component {
       isrc_code: this.state.isrc_code,
       p_line: this.state.p_line,
       aliases: this.state.aliases,
+      contractID: this.state.contractID,
       contractName: this.state.contractName
     }
 
     console.log(track);
-
 
     axios.post('http://localhost:5000/tracks/add', track)
       .then(res => console.log(res.data))
@@ -148,13 +178,22 @@ export default class CreateTrack extends Component {
               className="form-control"
               value={this.state.contractName}
               onChange={this.onChangeContractName}>
-              <option value="">-- no contract --</option>
+              <option
+                key={null}
+                data-key={null}
+                value={null}
+              >
+                -- no contract --
+              </option>
               {
                 this.state.contracts.map(function(contract) {
                   return <option
-                    key={contract}
-                    value={contract}>{contract}
-                  </option>;
+                    key={contract.id}
+                    data-key={contract.id}
+                    value={contract.name}
+                  >
+                    {contract.name}
+                  </option>
                 })
               }
             </select>

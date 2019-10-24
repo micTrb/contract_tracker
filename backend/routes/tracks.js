@@ -4,17 +4,14 @@ let Track = require('../models/track.model');
 let Contract = require('../models/contract.model');
 
 
-//Get by id
-/*router.route('/contracts/').get((req, res) => {
-  console.log(req, res);
-})*/
-
 //Get onload request
 router.route('/').get((req, res) => {
+
   Track.find()
     .then(track => res.json(track))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
 
 // Post request - Adding track
 router.route('/add').post((req, res) => {
@@ -24,6 +21,7 @@ router.route('/add').post((req, res) => {
   const isrc_code = req.body.isrc_code;
   const p_line = req.body.p_line;
   const aliases = req.body.aliases;
+  const contractID = req.body.contractID;
   const contractName = req.body.contractName;
 
   const newTrack = new Track ({
@@ -33,17 +31,34 @@ router.route('/add').post((req, res) => {
     isrc_code,
     p_line,
     aliases,
+    contractID,
     contractName
   });
 
 
-  newTrack.save()
-    .then(() => res.json('Track added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+  //DATA INGESTION RULES
+
+  Contract.findById(contractID, function(err, contract) {
+    if(contract !== 'undefined') {
+      newTrack.save()
+        .then(() => res.json('Track added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else if(contractName && contract == 'undefined') {
+      return err;
+    }
+    else {
+      newTrack.save()
+        .then(() => res.json('Track added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+  });
+
 });
 
 //Get by id
 router.route('/:id').get((req, res) => {
+
   Track.findById(req.params.id)
     .then(track => res.json(track))
     .catch(err => res.status(400).json('Error: ' + err))
