@@ -167,13 +167,15 @@ export default class EditExercise extends Component {
       isrc_code: this.state.isrc_code,
       p_line: this.state.p_line,
       aliases: this.state.aliases,
+      contractID: this.state.contractID,
       contractName: this.state.contractName,
     }
 
     console.log(track);
 
     axios.post('http://localhost:5000/tracks/update/' + this.props.match.params.id, track)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Error: " + err));
 
     window.location = '/';
 
