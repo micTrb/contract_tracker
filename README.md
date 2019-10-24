@@ -1,10 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+##MERN Contract tracker
+
+A simple MERN (MongoDB, Express.js, React.js and Node.js) application to ingest track data based on music 
+contracts.
+
+**Notice**: I provided a cluster that relies on my MongoDB account
+
+###Getting started
+
+First of all, install root dependecies: 
+
+from ``` root ```
+
+``` 
+npm install 
+```
+
+this command will install all the dependencies needed (including Mocha for testing and Babel).
+
+<br />
+
+Then, install backend dependecies: 
+
+from ``` root/backend ```
+
+``` 
+npm install 
+```
+
+this command will install all the dependencies needed (including Mocha for testing and Babel).
+
+
+
+
+
+
+Launch the project from root directory:
+```
+npm run start
+```
+It will run the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+
+From root/backed directory
+
+```
+npm 
+```
+
+
+
+
+
+
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+###### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
