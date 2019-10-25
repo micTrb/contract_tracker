@@ -155,6 +155,8 @@ export default class CreateTrack extends Component {
     axios.post('http://localhost:5000/tracks/add', track)
       .then(res => console.log(res.data))
       .catch(err => console.log("Err: " + err));
+
+    window.location = "/";
   }
 
 
