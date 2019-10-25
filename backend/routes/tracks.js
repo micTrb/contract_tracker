@@ -85,17 +85,14 @@ router.route('/update/:id').post((req, res) => {
       //DATA INGESTION RULES
       Contract.findById(contractID, function(err, contract) {
         if(contract !== 'undefined') {
-          console.log("if");
           track.save()
             .then(() => res.json('Track updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
         }
         else if(contractName && contract == 'undefined') {
-          console.log("err");
           return err;
         }
         else {
-          console.log("else");
           track.save()
             .then(() => res.json('Track updated!'))
             .catch(err => res.status(400).json('Error: ' + err));

@@ -58,7 +58,6 @@ export default class EditExercise extends Component {
     axios.get('http://localhost:5000/contracts')
       .then(response => {
         if(response.data.length > 0) {
-          console.log(response);
           this.setState({
             contracts: response.data.map(contract => (
               {
@@ -78,7 +77,6 @@ export default class EditExercise extends Component {
   onChangeContractName(e) {
     const selectedIndex = e.target.options.selectedIndex;
     const id = e.target.options[selectedIndex].getAttribute('data-key');
-    console.log(id);
 
     if(id) {
       axios.get('http://localhost:5000/contracts/' + id)
@@ -171,7 +169,6 @@ export default class EditExercise extends Component {
       contractName: this.state.contractName,
     }
 
-    console.log(track);
 
     axios.post('http://localhost:5000/tracks/update/' + this.props.match.params.id, track)
       .then(res => console.log(res.data))
