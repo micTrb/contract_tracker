@@ -78,8 +78,9 @@ router.route('/update/:id').post((req, res) => {
       track.isrc_code = req.body.isrc_code;
       track.p_line = req.body.p_line;
       track.aliases = req.body.aliases;
-      const contractID = req.body.contractID;
       track.contractName = req.body.contractName;
+
+      const contractID = req.body.contractID;
 
       //DATA INGESTION RULES
       Contract.findById(contractID, function(err, contract) {
@@ -90,11 +91,11 @@ router.route('/update/:id').post((req, res) => {
             .catch(err => res.status(400).json('Error: ' + err));
         }
         else if(contractName && contract == 'undefined') {
-          console.log("if");
+          console.log("err");
           return err;
         }
         else {
-          console.log("if");
+          console.log("else");
           track.save()
             .then(() => res.json('Track updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
